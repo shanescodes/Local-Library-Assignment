@@ -9,41 +9,43 @@ function findAuthorById(authors, id) {
 }
 
 function findBookById(books, id) {
-  let result = {} 
-    for(let i = 0; i < books.length; i++) {
-  if (id == books[i].id) {
-    return books[i]
-  }
-  }
-return result
-}
-
-function partitionBooksByBorrowedStatus(books) { 
-  let returned = []
-  let not_returned = []
-  for(let i = 0; i < books.length; i++) {
-    if(books[i].borrows.find(b => b.returned == false)) {
-not_returned.push(books[i])
-    } else {
-returned.push(books[i])
+  let result = {}
+  for (let i = 0; i < books.length; i++) {
+    if (id == books[i].id) {
+      return books[i]
     }
   }
-  return [not_returned, returned] 
+  return result
 }
 
-function getBorrowersForBook(book, accounts) { 
+function partitionBooksByBorrowedStatus(books) {
+  let returned = []
+  let not_returned = []
+  const result = books.reduce((acc, item) => {
+    if (item.borrows.find(b => b.returned == false)) {
+      acc[0].push(item)
+    } else {
+      acc[1].push(item)
+    }
+    return acc
+  }, [[], []])
+  for (let i = 0; i < books.length; i++) {
+
+  }
+  return result
+}
+
+function getBorrowersForBook(book, accounts) {
   let borrowers = [];
-  accounts.map((account)=>{
-   book.borrows.find((borrow)=>
-   {
-     if(borrow.id === account.id)
-       {
-          account["returned"] = borrow.returned
-          borrowers.push(account)
-       }
- 
-   })
-   })
+  accounts.map((account) => {
+    book.borrows.find((borrow) => {
+      if (borrow.id === account.id) {
+        account["returned"] = borrow.returned
+        borrowers.push(account)
+      }
+
+    })
+  })
   return borrowers.splice(0, 10);
 }
 
