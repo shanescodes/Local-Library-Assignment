@@ -14,17 +14,13 @@ function sortAccountsByLastName(accounts) {
 
 function getTotalNumberOfBorrows(account, books) {
   let idOfBorrows = [];
-  //let borrow = []
   for (let i = 0; i < books.length; i++) {
     const book = books[i].borrows
-    //console.log(book)
     for (let j = 0; j < book.length; j++) {
       let borrowId = book[j].id;
-      //console.log(borrowId)
       idOfBorrows.push(borrowId);
     }
   }
-  //console.log(account)
   let idMatch = idOfBorrows.filter((matches) => matches == account.id);
 
   return idMatch.length

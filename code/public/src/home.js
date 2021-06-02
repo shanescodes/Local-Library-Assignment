@@ -40,21 +40,25 @@ function getMostCommonGenres(books) {
 
   }
   console.log(countGenre)
-  countGenre = countGenre.sort((a, b) => b.count - a.count)
+  countGenre = sortByCount(countGenre)
     .filter((item, i) => i < 5)
   return countGenre
 }
 
 
 function getMostPopularBooks(books) {
-  return books.map(book => {
+  const result = books.map(book => {
     return {
       name: book.title,
       count: book.borrows.length
     }
   })
-    .sort((a, b) => b.count - a.count)
+  return sortByCount(result)
     .filter((item, i) => i < 5)
+}
+//helper function
+function sortByCount(array) {
+return array.sort((a, b) => b.count - a.count)
 }
 
 function getMostPopularAuthors(books, authorsList) {

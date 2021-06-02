@@ -19,8 +19,6 @@ function findBookById(books, id) {
 }
 
 function partitionBooksByBorrowedStatus(books) {
-  let returned = []
-  let not_returned = []
   const result = books.reduce((acc, item) => {
     if (item.borrows.find(b => b.returned == false)) {
       acc[0].push(item)
@@ -29,9 +27,7 @@ function partitionBooksByBorrowedStatus(books) {
     }
     return acc
   }, [[], []])
-  for (let i = 0; i < books.length; i++) {
-
-  }
+  
   return result
 }
 
